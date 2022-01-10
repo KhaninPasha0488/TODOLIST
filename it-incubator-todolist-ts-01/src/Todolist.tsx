@@ -8,29 +8,45 @@ import Task from "./Task";
  type TodolistpropsType = {
     title: string
     task: Array<TaskType>
+     removeTask :(taskID:number)=> void
 
 }
 
 
+
 export const Todolist = (props: TodolistpropsType) => {
+    const taskComponents = props.task.map(t => {
+        return (
+            <Task
+                key={t.id}
+                id={t.id}
+                title={t.title}
+                isDone={t.isDone}
+                removeTask ={props.removeTask}
+
+            />
+        )
+    })
     return (
         <div>
             <TodoListHeader title={props.title}/>
 
             <div>
                 <input/>
-                <button>+</button>
+                <button >+</button>
             </div>
             <ul>
+                {taskComponents}
+
                 {/*{props.task.map(m => {*/}
                 {/*    // debugger*/}
                 {/*    return (*/}
                 {/*        <li><input type="checkbox" checked={m.isDone}/> <span>{m.title}</span></li>*/}
                 {/*    )*/}
                 {/*})}*/}
-                <Task key={props.task[0].id} {...props.task[0]}/>
-                <Task key={props.task[1].id} {...props.task[1]}/>
-                <Task key={props.task[2].id} {...props.task[2]}/>
+                {/*<Task key={props.task[0].id} {...props.task[0]}/>*/}
+                {/*<Task key={props.task[1].id} {...props.task[1]}/>*/}
+                {/*<Task key={props.task[2].id} {...props.task[2]}/>*/}
                 {/*<li key={props.task[0].id} >*/}
                 {/*    <input type="checkbox" checked={props.task[0].isDone}/>*/}
                 {/*<span>{props.task[0].title}</span>*/}
