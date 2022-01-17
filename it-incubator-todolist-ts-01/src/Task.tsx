@@ -3,7 +3,7 @@ import {TaskType} from "./App";
 
 
 type TaskPropsType = TaskType & {
-    removeTask: (taskID: number) => void
+    removeTask: (taskID: string) => void
 }
 const Task: React.FC<TaskPropsType> = ({
        id,
@@ -11,7 +11,7 @@ const Task: React.FC<TaskPropsType> = ({
        isDone,
        removeTask
 
-                                       }) => {
+}) => {
 
     return (
         <li>
@@ -23,3 +23,11 @@ const Task: React.FC<TaskPropsType> = ({
 };
 
 export default Task;
+// 1. Функция принимает параметром массив чисел и возвращает max значение.
+// getMax1([1,4,6,8]) => 8
+// 2. Функция принимает параметром массив чисел и возвращает массив с двумя макс значениями
+// getMax2([1,4,6,8]) => [8, 6]
+// 3. Функция принимает параметром массив чисел и количество max,
+// которые надо найти и возвращает массив  max значениями
+// getMax3([1,4,6,8], 3) => [8, 6, 4]
+// math.max и sort не используем!

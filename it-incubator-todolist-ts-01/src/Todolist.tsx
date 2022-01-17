@@ -1,77 +1,125 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TodoListHeader from "./TodoListHeader";
 import Button from "./Button";
-import {TaskType} from "./App";
+import {FilterValueType, TaskType} from "./App";
 import Task from "./Task";
 
 
- type TodolistpropsType = {
+type TodolistpropsType = {
     title: string
     task: Array<TaskType>
-     removeTask :(taskID:number)=> void
-
+    removeTask: (taskID: string) => void
+    changeFilter: (filter: FilterValueType) => void
+    addTask: (title:string) => void
 }
 
 
 
+
+
 export const Todolist = (props: TodolistpropsType) => {
-    const taskComponents = props.task.map(t => {
+    const [title,setTitle] = useState<string>("")
+    const taskComponents = props.task.map(t => {     //(<Task key ={t.id} {...t}) />
         return (
             <Task
                 key={t.id}
                 id={t.id}
                 title={t.title}
                 isDone={t.isDone}
-                removeTask ={props.removeTask}
+                removeTask={props.removeTask}
 
             />
         )
     })
+    const onClickAddTask = ()=> {
+        props.addTask(title)
+        setTitle("")
+    }
+    const setAllFilter = ()=>{
+        return props.changeFilter("all")
+    }
+    const setActiveFilter = ()=>{
+        return props.changeFilter("active")
+    }
+    const setCompletedFilter = ()=>{
+        return props.changeFilter("completed")
+    }
     return (
         <div>
             <TodoListHeader title={props.title}/>
 
             <div>
-                <input/>
-                <button >+</button>
+                <input value={title}
+                       onChange={(e) =>setTitle(e.currentTarget.value)}
+                       // onClickAddTask={ onClickAddTask}
+
+                />
+                <button onClick={onClickAddTask}>+</button>
             </div>
             <ul>
                 {taskComponents}
 
-                {/*{props.task.map(m => {*/}
-                {/*    // debugger*/}
-                {/*    return (*/}
-                {/*        <li><input type="checkbox" checked={m.isDone}/> <span>{m.title}</span></li>*/}
-                {/*    )*/}
-                {/*})}*/}
-                {/*<Task key={props.task[0].id} {...props.task[0]}/>*/}
-                {/*<Task key={props.task[1].id} {...props.task[1]}/>*/}
-                {/*<Task key={props.task[2].id} {...props.task[2]}/>*/}
-                {/*<li key={props.task[0].id} >*/}
-                {/*    <input type="checkbox" checked={props.task[0].isDone}/>*/}
-                {/*<span>{props.task[0].title}</span>*/}
-                {/*</li>*/}
-
-                {/* <li  key={props.task[1].id}>*/}
-                {/*     <input type="checkbox" checked={props.task[1].isDone}/>*/}
-                {/*<span>{props.task[1].title}</span>*/}
-                {/* </li>*/}
-
-                {/* <li  key={props.task[2].id}>*/}
-                {/*     <input type="checkbox" checked={props.task[2].isDone}/>*/}
-                {/*<span>{props.task[2].title}</span>*/}
-                {/* </li>*/}
             </ul>
             <div>
-                <Button title={'All'}/>
-                <Button title={'Active'}/>
-                <Button title={'Active'}/>
-                {/*<button>All</button>*/}
-                {/*<button>Active</button>*/}
-                {/*<button>Completed</button>*/}
+                <Button title={'All'}
+                        onClickCallback={setAllFilter}
+                />
+                <Button
+                    onClickCallback={setActiveFilter}
+                    title={'Active'}
+                />
+                <Button
+                    onClickCallback={setCompletedFilter}
+                    title={'Completed'}
+                />
+
             </div>
         </div>
     )
 }//создать createReactApp
 //скопировать сюда src того что мы делали
 //так у вас получится два абсолютно одинаковых проекта (запустите оба)
+{/*{props.task.map(m => {*/
+}
+{/*    // debugger*/
+}
+{/*    return (*/
+}
+{/*        <li><input type="checkbox" checked={m.isDone}/> <span>{m.title}</span></li>*/
+}
+{/*    )*/
+}
+{/*})}*/
+}
+{/*<Task key={props.task[0].id} {...props.task[0]}/>*/
+}
+{/*<Task key={props.task[1].id} {...props.task[1]}/>*/
+}
+{/*<Task key={props.task[2].id} {...props.task[2]}/>*/
+}
+{/*<li key={props.task[0].id} >*/
+}
+{/*    <input type="checkbox" checked={props.task[0].isDone}/>*/
+}
+{/*<span>{props.task[0].title}</span>*/
+}
+{/*</li>*/
+}
+
+{/* <li  key={props.task[1].id}>*/
+}
+{/*     <input type="checkbox" checked={props.task[1].isDone}/>*/
+}
+{/*<span>{props.task[1].title}</span>*/
+}
+{/* </li>*/
+}
+
+{/* <li  key={props.task[2].id}>*/
+}
+{/*     <input type="checkbox" checked={props.task[2].isDone}/>*/
+}
+{/*<span>{props.task[2].title}</span>*/
+}
+{/* </li>*/
+}
