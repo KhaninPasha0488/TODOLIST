@@ -2,10 +2,14 @@ import React from 'react';
 
 type  ButtonPropsType = {
     title: string
+    onClickCallback:()=> void
 }
-const Button = (props: ButtonPropsType) => {
+const Button:React.FC<ButtonPropsType> = ({
+    title,
+    onClickCallback
+}) => {
     return (
-        <button>{props.title}</button>
+        <button onClick={onClickCallback}>{title}</button>
     );
 };
 
