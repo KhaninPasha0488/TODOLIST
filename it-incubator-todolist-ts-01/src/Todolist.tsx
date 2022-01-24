@@ -11,6 +11,9 @@ type TodolistpropsType = {
     removeTask: (taskID: string) => void
     changeFilter: (filter: FilterValueType) => void
     addTask: (title:string) => void
+    changeTaskStatus : (taskId: string,isDone:boolean) => void
+    filter:FilterValueType
+
 }
 
 
@@ -27,6 +30,8 @@ export const Todolist = (props: TodolistpropsType) => {
                 title={t.title}
                 isDone={t.isDone}
                 removeTask={props.removeTask}
+                changeTaskStatus={props.changeTaskStatus}
+
 
             />
         )
@@ -61,14 +66,18 @@ export const Todolist = (props: TodolistpropsType) => {
 
             </ul>
             <div>
-                <Button title={'All'}
+                <Button
+                   active={props.filter === "all"}
+                    title={'All'}
                         onClickCallback={setAllFilter}
                 />
                 <Button
+                    active={props.filter === "active"}
                     onClickCallback={setActiveFilter}
                     title={'Active'}
                 />
                 <Button
+                    active={props.filter === "completed"}
                     onClickCallback={setCompletedFilter}
                     title={'Completed'}
                 />

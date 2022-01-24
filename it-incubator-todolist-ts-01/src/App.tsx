@@ -57,6 +57,11 @@ const App = () => {
         setTask(updatedTask)
 
     }
+     const changeTaskStatus = (taskId: string,isDone:boolean) => {
+
+         setTask(task.map(t => t.id === taskId ? {...t,  isDone} : t))
+     }
+
 
     return (
         <div className="App">
@@ -65,6 +70,8 @@ const App = () => {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTask={addTask}
+                      changeTaskStatus={changeTaskStatus}
+                      filter={filter}
             />
 
         </div>
