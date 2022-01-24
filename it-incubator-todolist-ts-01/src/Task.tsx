@@ -4,18 +4,22 @@ import {TaskType} from "./App";
 
 type TaskPropsType = TaskType & {
     removeTask: (taskID: string) => void
+    changeTaskStatus:(taskID: string,isDone:boolean) => void
 }
 const Task: React.FC<TaskPropsType> = ({
        id,
        title,
        isDone,
-       removeTask
+       removeTask,
+       changeTaskStatus
 
 }) => {
 
     return (
-        <li>
-            <input type="checkbox" checked={isDone}/>
+        <li className={isDone ? "is_done": ""}>
+            <input type="checkbox" checked={isDone}
+               onChange= {(e)=>changeTaskStatus(id, e.currentTarget.checked)}
+            />
             <span>{title}</span>
             <button onClick={() => removeTask(id)}>x</button>
         </li>
