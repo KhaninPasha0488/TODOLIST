@@ -22,6 +22,7 @@ type TodolistpropsType = {
 
 export const Todolist = (props: TodolistpropsType) => {
     const [title,setTitle] = useState<string>("")
+    const [error, setError] = useState<boolean>(false)
     const taskComponents = props.task.map(t => {     //(<Task key ={t.id} {...t}) />
         return (
             <Task
@@ -37,7 +38,13 @@ export const Todolist = (props: TodolistpropsType) => {
         )
     })
     const onClickAddTask = ()=> {
-        props.addTask(title)
+        const trimmedTitle = title.trim()
+        if( trimmedTitle) {
+            props.addTask(trimmedTitle)
+        }else{
+            setError(true)
+        }
+
         setTitle("")
     }
     const setAllFilter = ()=>{
@@ -55,11 +62,15 @@ export const Todolist = (props: TodolistpropsType) => {
 
             <div>
                 <input value={title}
-                       onChange={(e) =>setTitle(e.currentTarget.value)}
+                       className={error ? "error":""}
+                       onChange={(e) =>{
+                           setError(false)
+                           setTitle(e.currentTarget.value)}}
                        // onClickAddTask={ onClickAddTask}
 
                 />
                 <button onClick={onClickAddTask}>+</button>
+                {error && <div style={{color:"red"}} >Title is required</div> }
             </div>
             <ul>
                 {taskComponents}

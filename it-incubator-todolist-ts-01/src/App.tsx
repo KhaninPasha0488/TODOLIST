@@ -4,7 +4,6 @@ import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 
-
 export type  TaskType = {
     id: string
     title: string
@@ -30,7 +29,7 @@ const App = () => {
     ])
     const [filter, setFilter] = useState<FilterValueType>("all")
 
-    const changeFilter = (filter:FilterValueType) => {
+    const changeFilter = (filter: FilterValueType) => {
         setFilter(filter)
 
     }
@@ -51,16 +50,16 @@ const App = () => {
     const removeTask = (taskID: string) => {
         setTask(task.filter(t => t.id !== taskID))
     }
-    const addTask = (title:string)=>{
-        const newTask :TaskType = {id:v1(), title:title, isDone: false}
+    const addTask = (title: string) => {
+        const newTask: TaskType = {id: v1(), title: title, isDone: false}
         const updatedTask: Array<TaskType> = [newTask, ...task]
         setTask(updatedTask)
 
     }
-     const changeTaskStatus = (taskId: string,isDone:boolean) => {
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
 
-         setTask(task.map(t => t.id === taskId ? {...t,  isDone} : t))
-     }
+        setTask(task.map(t => t.id === taskId ? {...t, isDone} : t))
+    }
 
 
     return (
