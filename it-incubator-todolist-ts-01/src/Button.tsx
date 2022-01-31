@@ -7,10 +7,11 @@ type  ButtonPropsType = {
 }
 const Button:React.FC<ButtonPropsType> = ({
     title,
-    onClickCallback
+    onClickCallback,
+  active
 }) => {
     return (
-        <button onClick={onClickCallback}>{title}</button>
+        <button className={active ? "active":""} onClick={onClickCallback}>{title}</button>
     );
 };
 
