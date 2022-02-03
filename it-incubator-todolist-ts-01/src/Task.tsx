@@ -1,27 +1,35 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {TaskType} from "./App";
 
 
 type TaskPropsType = TaskType & {
-    removeTask: (taskID: string) => void
-    changeTaskStatus:(taskID: string,isDone:boolean) => void
+    removeTask: (todolistId:string,taskID: string) => void
+    changeTaskStatus:(todolistId:string,taskID: string,isDone:boolean) => void
+    todolistId:string
+
 }
 const Task: React.FC<TaskPropsType> = ({
        id,
        title,
        isDone,
        removeTask,
-       changeTaskStatus
+       changeTaskStatus,
+       todolistId
 
 }) => {
-
+    const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        console.log( e.currentTarget.checked)
+        changeTaskStatus(todolistId,id,  e.currentTarget.checked);
+    }
     return (
+
+
         <li className={isDone ? "is_done": ""}>
             <input type="checkbox" checked={isDone}
-               onChange= {(e)=>changeTaskStatus(id, e.currentTarget.checked)}
+               onChange= {onChangeHandler}
             />
             <span>{title}</span>
-            <button onClick={() => removeTask(id)}>x</button>
+            <button onClick={() => removeTask(todolistId,id)}>x</button>
         </li>
     );
 };
