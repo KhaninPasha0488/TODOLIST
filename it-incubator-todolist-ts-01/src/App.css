@@ -17,3 +17,6 @@
   border: 2px solid red;
   outline: transparent;
 }
+.buttonTitle{
+ display:flex;
+}
