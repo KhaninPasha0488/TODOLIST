@@ -1,11 +1,13 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {TaskType} from "./App";
+import EditableSpan from "./component/EditableSpan";
 
 
 type TaskPropsType = TaskType & {
-    removeTask: (todolistId:string,taskID: string) => void
-    changeTaskStatus:(todolistId:string,taskID: string,isDone:boolean) => void
-    todolistId:string
+    removeTask: (todolistId: string, taskID: string) => void
+    changeTaskStatus: (todolistId: string, taskID: string, isDone: boolean) => void
+    todolistId: string
+    editTitleTask:(todolistId: string,id:string, title: string)=>void
 
 }
 const Task: React.FC<TaskPropsType> = ({
@@ -14,22 +16,28 @@ const Task: React.FC<TaskPropsType> = ({
        isDone,
        removeTask,
        changeTaskStatus,
-       todolistId
+       todolistId,
+       editTitleTask,
 
 }) => {
-    const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
-        console.log( e.currentTarget.checked)
-        changeTaskStatus(todolistId,id,  e.currentTarget.checked);
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+
+         changeTaskStatus(todolistId, id, e.currentTarget.checked);
     }
+
+
+   const taskHandler = (todolistId:string ,id:string,title:string) => {
+       editTitleTask(todolistId,id,title)
+   }
     return (
 
 
-        <li className={isDone ? "is_done": ""}>
+        <li className={isDone ? "is_done" : ""}>
             <input type="checkbox" checked={isDone}
-               onChange= {onChangeHandler}
+                   onChange={onChangeHandler}
             />
-            <span>{title}</span>
-            <button onClick={() => removeTask(todolistId,id)}>x</button>
+            <EditableSpan title={title} callBack={(title)=>taskHandler(todolistId,id,title)}/>
+            <button onClick={() => removeTask(todolistId, id)}>x</button>
         </li>
     );
 };
