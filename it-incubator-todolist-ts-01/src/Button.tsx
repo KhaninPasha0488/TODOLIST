@@ -2,16 +2,16 @@ import React from 'react';
 
 type  ButtonPropsType = {
     title: string
-    onClickCallback:()=> void
-    active:boolean
+    onClickCallback: () => void
+    active: boolean
 }
-const Button:React.FC<ButtonPropsType> = ({
-    title,
-    onClickCallback,
-  active
-}) => {
+const Button: React.FC<ButtonPropsType> = ({
+       title,
+       onClickCallback,
+       active
+   }) => {
     return (
-        <button className={active ? "active":""} onClick={onClickCallback}>{title}</button>
+        <button className={active ? "active" : ""} onClick={onClickCallback}>{title}</button>
     );
 };
 

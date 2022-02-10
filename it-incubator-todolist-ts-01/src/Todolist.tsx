@@ -17,8 +17,8 @@ export type TodolistpropsType = {
     filter: FilterValueType,
     todolistId: string,
     removeTodo: (todolistId: string) => void
-    editTitleTodolist:(todolistID:string,title:string)=>void
-    editTitleTask:(todolistId: string,id:string, title: string)=>void
+    editTitleTodolist: (todolistID: string, title: string) => void
+    editTitleTask: (todolistId: string, id: string, title: string) => void
 
 
 }
@@ -27,7 +27,7 @@ export type TodolistpropsType = {
 export const Todolist = (props: TodolistpropsType) => {
 
 
-    const taskComponents = props.tasks.map(t => {     //(<Task key ={t.id} {...t}) />
+    const taskComponents = props.tasks.map(t => {//(<Task key ={t.id} {...t}) />
         return (
             <Task
                 key={t.id}
@@ -38,38 +38,42 @@ export const Todolist = (props: TodolistpropsType) => {
                 removeTask={() => props.removeTask(props.todolistId, t.id)}
                 changeTaskStatus={props.changeTaskStatus}
                 editTitleTask={props.editTitleTask}
-                
+
             />
         )
+
     })
+    const changeFilterHandler = (filter:FilterValueType) => {
+        return props.changeFilter(props.todolistId,filter)
+    }
 
-    const setAllFilter = () => {
-        return props.changeFilter(props.todolistId, "all")
-    }
-    const setActiveFilter = () => {
-        return props.changeFilter(props.todolistId, "active")
-    }
-    const setCompletedFilter = () => {
-        return props.changeFilter(props.todolistId, "completed")
-    }
+    // const setAllFilter = () => {
+    //     return props.changeFilter(props.todolistId, "all")
+    // }
+    // const setActiveFilter = () => {
+    //     return props.changeFilter(props.todolistId, "active")
+    // }
+    // const setCompletedFilter = () => {
+    //     return props.changeFilter(props.todolistId, "completed")
+    // }
     const onClickHandlerForDeletTodo = () => {
-
         props.removeTodo(props.todolistId)
     }
-    const addTaskHandler =(title:string)=>{
-        props.addTask(props.todolistId,title)
+    const addTaskHandler = (title: string) => {
+        props.addTask(props.todolistId, title)
 
     }
-    const editTitleTodolistHendler = (tID:string,title:string)=>{
-        props.editTitleTodolist(props.todolistId,title, )
+    const editTitleTodolistHendler = (tID: string, title: string) => {
+        props.editTitleTodolist(props.todolistId, title,)
     }
     return (
         <div>
             <h3 className={"buttonTitle"}>
-                <EditableSpan callBack={(title)=>editTitleTodolistHendler(props.todolistId,title)} title={props.title}/>
+                <EditableSpan callBack={(title) => editTitleTodolistHendler(props.todolistId, title)}
+                              title={props.title}/>
                 <button onClick={onClickHandlerForDeletTodo}>x</button>
             </h3>
-            <AddItemForm callBack={addTaskHandler}   />
+            <AddItemForm callBack={addTaskHandler}/>
 
             <ul>
                 {taskComponents}
@@ -79,16 +83,16 @@ export const Todolist = (props: TodolistpropsType) => {
                 <Button
                     active={props.filter === "all"}
                     title={'All'}
-                    onClickCallback={setAllFilter}
+                    onClickCallback={() => changeFilterHandler("all")}
                 />
                 <Button
                     active={props.filter === "active"}
-                    onClickCallback={setActiveFilter}
+                    onClickCallback={() => changeFilterHandler("active")}
                     title={'Active'}
                 />
                 <Button
                     active={props.filter === "completed"}
-                    onClickCallback={setCompletedFilter}
+                    onClickCallback={() => changeFilterHandler("completed")}
                     title={'Completed'}
                 />
 
