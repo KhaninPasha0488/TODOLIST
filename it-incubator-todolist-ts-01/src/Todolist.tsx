@@ -43,8 +43,8 @@ export const Todolist = (props: TodolistpropsType) => {
         )
 
     })
-    const changeFilterHandler = (filter:FilterValueType) => {
-        return props.changeFilter(props.todolistId,filter)
+    const changeFilterHandler = (filter: FilterValueType) => {
+        return props.changeFilter(props.todolistId, filter)
     }
 
     // const setAllFilter = () => {
@@ -72,6 +72,7 @@ export const Todolist = (props: TodolistpropsType) => {
                 <EditableSpan callBack={(title) => editTitleTodolistHendler(props.todolistId, title)}
                               title={props.title}/>
                 <button onClick={onClickHandlerForDeletTodo}>x</button>
+
             </h3>
             <AddItemForm callBack={addTaskHandler}/>
 
