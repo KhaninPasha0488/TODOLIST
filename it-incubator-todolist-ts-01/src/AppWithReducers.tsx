@@ -3,6 +3,7 @@ import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
 import AddItemForm from "./component/AddItemForm";
+import {removeTaskAC} from "./state/tasks-reducer";
 
 export type TaskType = {
     id: string,
@@ -21,16 +22,16 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+function AppWithReducers() {
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+    let [todolists, dispatchToTaskTodolist] = useState<Array<TodolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState({
+    let [tasks, dispatchToTask] = useState({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -59,7 +60,9 @@ function App() {
     }
 
     function removeTask(todolistId: string, id: string) {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== id)});
+        // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(f => f.id !== id)});
+        let action = removeTaskAC(todolistId,id)
+        dispatchToTask(action)
 
     }
 
@@ -131,4 +134,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppWithReducers;

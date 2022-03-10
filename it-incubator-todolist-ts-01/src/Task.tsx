@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {TaskType} from "./App";
+import {TaskType} from "./AppWithReducers";
 import EditableSpan from "./component/EditableSpan";
 
 

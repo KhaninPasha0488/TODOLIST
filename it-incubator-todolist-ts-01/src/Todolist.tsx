@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import EditableSpan from "./component/EditableSpan";
 import Button from "./Button";
-import {FilterValueType, TaskType} from "./App";
+import {FilterValueType, TaskType} from "./AppWithReducers";
 import Task from "./Task";
 import button from "./Button";
 import AddItemForm from "./component/AddItemForm";
