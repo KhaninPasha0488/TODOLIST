@@ -100,11 +100,8 @@ export const Todolist = (props: TodolistpropsType) => {
             </div>
         </div>
     )
-}//создать createReactApp
-//скопировать сюда src того что мы делали
-//так у вас получится два абсолютно одинаковых проекта (запустите оба)
-{/*{props.task.map(m => {*/
-}
+
+
 {/*    // debugger*/
 }
 {/*    return (*/
