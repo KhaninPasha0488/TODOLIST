@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
-import button from "../Button";
+
+
+
+
+
+
 
 export type AddItemFromType = {
     callBack: ( title: string) => void
 
 }
 
-const AddItemForm = (props: AddItemFromType) => {
+export const AddItemForm = (props: AddItemFromType) => {
     // const {callBack}=props
     const [title, setTitle] = useState<string>("")
     const [error, setError] = useState<boolean>(false)
